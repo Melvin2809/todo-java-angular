@@ -1,3 +1,6 @@
+
+// Fournit l’accès aux utilisateurs en base (chercher par email, vérifier si un email existe).
+
 package com.todo.backend.repository;
 
 import com.todo.backend.domain.AppUser;

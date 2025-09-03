@@ -1,3 +1,6 @@
+
+// Représente un utilisateur en base (email, mot de passe hashé, rôle, date de création).
+
 package com.todo.backend.domain;
 
 import jakarta.persistence.*;

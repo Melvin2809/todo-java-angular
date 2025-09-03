@@ -1,3 +1,6 @@
+
+# Configuration de l’application (base de données H2, Flyway, JWT, CORS)
+
 server:
   port: 8080
 
