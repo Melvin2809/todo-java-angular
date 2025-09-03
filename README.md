@@ -1,5 +1,5 @@
 # todo-java-angular
-Develop a to-list with Java and Angular
+Develop a todo-list with Java and Angular
 
 
 Pour tester en ligne :
@@ -8,4 +8,4 @@ Pour tester en ligne :
   - Neon (PostgreSQL cloud) → pour héberger ta base
   - StackBlitz Angular → pour coder ton front en ligne
 
-Pour lancer le backend : $ mvn spring-boot:run
+Pour lancer le backend faire 2 fois cd backend puis : $ mvn spring-boot:run
