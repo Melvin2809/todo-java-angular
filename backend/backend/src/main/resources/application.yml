@@ -12,18 +12,20 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: true
         jdbc.time_zone: UTC
   flyway:
-    enabled: true
+    enabled: false
     locations: classpath:db/migration
 
 logging:
   level:
+    org.springframework: INFO
     org.springframework.security: INFO
+    org.hibernate.SQL: INFO
 
 app:
   cors:

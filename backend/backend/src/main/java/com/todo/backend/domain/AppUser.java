@@ -25,6 +25,13 @@ public class AppUser {
   @Column(nullable=false)
   private String role = "USER";
 
+  @Builder.Default
   @Column(name="created_at", nullable=false)
   private Instant createdAt = Instant.now();
+
+  @PrePersist
+  void onCreate() {
+    if (createdAt == null) createdAt = Instant.now();
+  }
+
 }

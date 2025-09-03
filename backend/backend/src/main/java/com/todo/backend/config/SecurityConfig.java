@@ -3,31 +3,20 @@
 
 package com.todo.backend.config;
 
-import com.todo.backend.security.JwtAuthFilter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;     
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Configuration
-@EnableMethodSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
-  private final JwtAuthFilter jwt;
 
   @Bean
-  PasswordEncoder passwordEncoder() {
+  public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
@@ -37,22 +26,8 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable())
       .cors(Customizer.withDefaults())
       .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-      .authorizeHttpRequests(reg -> reg
-        .requestMatchers("/api/auth/**","/v3/api-docs/**","/swagger-ui/**").permitAll()
-        .anyRequest().authenticated()
-      )
-      .addFilterBefore(jwt, UsernamePasswordAuthenticationFilter.class)
+      .authorizeHttpRequests(reg -> reg.anyRequest().permitAll())
       .build();
   }
-
-  @Bean
-  CorsConfigurationSource corsConfigurationSource(@Value("${app.cors.allowed-origins}") String origins) {
-    var cfg = new CorsConfiguration();
-    cfg.setAllowedOrigins(Arrays.asList(origins.split(",")));
-    cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
-    cfg.setAllowedHeaders(List.of("*"));
-    var src = new UrlBasedCorsConfigurationSource();
-    src.registerCorsConfiguration("/**", cfg);
-    return src;
-  }
 }
+
