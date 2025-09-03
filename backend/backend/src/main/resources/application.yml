@@ -29,5 +29,5 @@ app:
   cors:
     allowed-origins: "http://localhost:4200,https://stackblitz.com"
   jwt:
-    secret: "change-me-in-prod"
+    secret: "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
     expiration: 3600000
